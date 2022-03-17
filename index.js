@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { movieRouter } from "./routes/Movies.js";
 import { userRouter } from "./routes/users.js";
 import cors from "cors";
+
 import { genPassword } from "./genPassword.js";
 
 dotenv.config();
