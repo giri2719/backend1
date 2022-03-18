@@ -22,15 +22,20 @@ router.get("/", async function (request, response) {
   const users = await get_all_userid();
   response.send(users);
 });
-router.put("/:username", async function (request, response) {
-  const { username } = request.params;
-  const name = request.body;
+
+router.put("/:id", async function (request, response) {
+  console.log("helll");
+  const user = request.body;
+  const a = user.username;
+  const b = user.password;
+  const hashpassword = await genPassword(b);
   const result = await clinet
     .db("ag")
     .collection("users")
-    .updateOne({ username: "null" }, { $set: name });
+    .updateOne({ username: a }, { $set: { password: hashpassword } });
   response.send(result);
 });
+
 router.post("/signup", async function (request, response) {
   const { username, password } = request.body;
   const hashpassword = await genPassword(password);
